@@ -1,0 +1,11 @@
+# Hugo build output
+/public/
+/resources/
+.hugo_build.lock
+
+# Import tooling deps
+/node_modules/
+/_raw/
+
+# OS
+.DS_Store

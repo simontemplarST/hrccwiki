@@ -1,0 +1,5 @@
+{{- $d := .Destination -}}
+{{- if strings.HasPrefix $d "/" -}}{{- $d = $d | relURL -}}{{- end -}}
+{{- $ext := or (strings.HasPrefix .Destination "http://") (strings.HasPrefix .Destination "https://") -}}
+<a href="{{ $d | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if $ext }} rel="noopener noreferrer" target="_blank"{{ end }}>{{ .Text | safeHTML }}</a>
+{{- /**/ -}}

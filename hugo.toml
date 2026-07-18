@@ -1,0 +1,30 @@
+baseURL = "/"
+languageCode = "en-us"
+title = "HRCC Wiki"
+theme = "hugo-book"
+
+# Preserve the original mixed-case wiki paths (e.g. /amateur/modes/SSTV/)
+disablePathToLower = true
+enableEmoji = true
+
+[params]
+  # Use the entire content tree as the wiki menu
+  BookSection = "*"
+  # Follow the OS/browser light/dark preference (original wiki had dark mode)
+  BookTheme = "auto"
+  BookToC = true
+  BookLogo = "hrcc.png"
+  BookServiceWorker = true
+  description = "The HRCC is a community focusing on Ham Radio"
+
+[markup]
+  [markup.goldmark.renderer]
+    # allow the raw <br> used inside multi-value table cells
+    unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+    ordered = false
+
+[taxonomies]
+  tag = "tags"
