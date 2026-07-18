@@ -1,0 +1,64 @@
+name: Auto-accept wiki edits
+
+# Community wiki: automatically approve and merge pull requests that only
+# touch wiki content (content/ and static/). PRs that change workflows,
+# site config, layouts, or the theme are left for a human to review so the
+# site and this automation can't be hijacked through a pull request.
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: auto-merge-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+    steps:
+      - name: Check that the PR only changes wiki content
+        id: check
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          files=$(gh api --paginate "repos/$REPO/pulls/$PR/files" -q '.[].filename')
+          echo "Changed files:"
+          echo "$files"
+          if [ -z "$files" ]; then
+            echo "No files changed; skipping."
+            echo "allowed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # Anything outside content/ or static/ blocks auto-merge.
+          outside=$(echo "$files" | grep -vE '^(content/|static/)' || true)
+          if [ -n "$outside" ]; then
+            echo "PR touches files outside wiki content — leaving for manual review:"
+            echo "$outside"
+            echo "allowed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "allowed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Approve
+        if: steps.check.outputs.allowed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number }}
+        run: gh pr review "$PR" --repo "$REPO" --approve || true
+
+      - name: Merge
+        if: steps.check.outputs.allowed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number }}
+        run: gh pr merge "$PR" --repo "$REPO" --squash --delete-branch || gh pr merge "$PR" --repo "$REPO" --squash

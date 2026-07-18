@@ -1,4 +1,4 @@
-baseURL = "/"
+baseURL = "https://hrcc.wiki/"
 languageCode = "en-us"
 title = "HRCC Wiki"
 theme = "hugo-book"
@@ -16,6 +16,8 @@ enableEmoji = true
   BookLogo = "hrcc.png"
   BookServiceWorker = true
   description = "The HRCC is a community focusing on Ham Radio"
+  # "Edit this page" link on every page -> opens the file in the GitHub editor
+  BookEditLink = "https://github.com/simontemplarST/hrccwiki/edit/main{{ .Path }}"
 
 [markup]
   [markup.goldmark.renderer]
