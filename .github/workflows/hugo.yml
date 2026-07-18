@@ -1,8 +1,10 @@
 name: Deploy Hugo site to Pages
 
 on:
-  push:
-    branches: ["main"]
+  # Build once a day to save on Actions usage. Merged PRs are published on
+  # the next scheduled run; use "Run workflow" for an immediate publish.
+  schedule:
+    - cron: "0 9 * * *" # daily ~01:00–02:00 America/Los_Angeles
   workflow_dispatch:
 
 permissions:
