@@ -60,7 +60,7 @@ If you are testing remotely, you will need:
 The HRCC VE team, made up of members from the HRCC Community, offers examinations for both new and upgrading licenses. Contact us thru Discord, join us for a scheduled remote exam session or send us an email.
 
 -   **Discord**: Join the HRCC Discord server at [https://discord.gg/hrcc](https://discord.gg/hrcc). Look for a channel named #testing-questions. Chat with the team, ask questions, or schedule an exam. Choose this option for the fastest response.
--   **Regularly Scheduled Sessions**: Register at [https://hamstudy.org/sessions/hrcc/all](https://hamstudy.org/sessions/hrcc/all). The HRCC team offers evening sessions with occasional morning throughout the week. *\[As of 10/1/2025 and due to government shutdown, sessions posted on HamStudy may be limited. We are still scheduling exams, but please contact us through the Discord channel or by email.\]*
+-   **Regularly Scheduled Sessions**: Register at [https://testwithhrcc.online](https://testwithhrcc.online). The HRCC team offers evening sessions with occasional morning throughout the week. Don't see something that works with your schedule?  Email us!
 -   **Email**: To set up a time that works best for you, send an email to the HRCC VE team at [testwithhrcc@gmail.com](mailto:testwithhrcc@gmail.com). One of the team members will reply within a day or two.
 
 ## How can I find an in-person session near me?
